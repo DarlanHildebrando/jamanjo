@@ -10,6 +10,7 @@ Por mais que eu não concorde, consigo entender as pessoas que não estavam prep
 O JAMANJO nasceu da vontade que criar algo mais normal, mais natural e 'lugar comum' para todas as pessoas.
 
 *** tecnologias
+React JS, Material UI, MUI lab (masonry layout), Framer Motion e outras coisas legais menos relevantes.
 
 Este projeto era um documento compartilhando links para auxiliar o aprendizado dos meus alunos, principalmente para os que estão se aventurando pela primeira vez no maravilhoso mundo do desenvolvimento mas não somente estes.
 Agora, ele está aos poucos virando uma página web, pra ficar mais organizado e acessível.
