@@ -1,6 +1,16 @@
 
 # JAMANJO
-## antes progHub, e mais antigamente vacina anti medianidade.
+*** badges
+## Uma selva de conhecimentos e facilidades para devs e aprendizes
+
+Meu antigo site para divulgação de recursos para meus alunos era o site mais bonito da internet, mas ainda assim dividia opiniões. 
+Costumo dizer que meu maior problema é a combinação de excesso de criatividade com total ausência de senso estético.
+Por mais que eu não concorde, consigo entender as pessoas que não estavam preparadas para entender a genialidade do design do projeto anterior :D
+
+O JAMANJO nasceu da vontade que criar algo mais comum, mais natural e 'lugar comum' para todas as pessoas.
+
+*** tecnologias
+
 Este projeto era um documento compartilhando links para auxiliar o aprendizado dos meus alunos, principalmente para os que estão se aventurando pela primeira vez no maravilhoso mundo do desenvolvimento mas não somente estes.
 Agora, ele está aos poucos virando uma página web, pra ficar mais organizado e acessível.
 
