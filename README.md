@@ -18,13 +18,7 @@ Meu antigo site para divulgação de recursos para meus alunos era o site mais b
 Costumo dizer que meu maior problema é a combinação de excesso de criatividade com total ausência de senso estético.
 Por mais que eu não concorde, consigo entender as pessoas que não estavam preparadas para entender a genialidade do design do projeto anterior :D
 
-O JAMANJO nasceu da vontade que criar algo mais normal, mais natural e 'lugar comum' para todas as pessoas.
-
-*** tecnologias
-React JS, Material UI, MUI lab (masonry layout), Framer Motion e outras coisas legais menos relevantes.
-
-Este projeto era um documento compartilhando links para auxiliar o aprendizado dos meus alunos, principalmente para os que estão se aventurando pela primeira vez no maravilhoso mundo do desenvolvimento mas não somente estes.
-Agora, ele está aos poucos virando uma página web, pra ficar mais organizado e acessível.
+O JAMANJO nasceu então da vontade de criar algo mais normal, mais natural e 'lugar comum' para todas as pessoas. Ahhh, claro que a ideia do nome/identidade veio enquanto eu tava assistindo um filme aí...
 
 <!-- ![Logo placa](public/img/jamanjo.svg) -->
 <!-- [![Descrição da imagem](public/img/jamanjo.svg)](https://www.jamanjo.com.br) -->
@@ -33,22 +27,28 @@ Agora, ele está aos poucos virando uma página web, pra ficar mais organizado e
 </a>
 
 
+## Histórico do projeto
+Este projeto era inicialmente um documento compartilhando links para auxiliar o aprendizado dos meus alunos, principalmente para os que estão se aventurando pela primeira vez no maravilhoso mundo do desenvolvimento mas não somente estes.
+Depois ele acabou virando uma página web, pra ficar mais organizado e acessível. 
+Nesta nova versão/identidade vem também pra me dar mais liberdade de usar ela como laboratório, testando seja lá o que eu quiser testar em termos de funcionalidades, libs, ferramentas ou seja lá o que for.
 
 
 ## Colaborações
+Este projeto-laboratório não é um projeto só para mim, nem um laboratório só pra mim :D
+Não deixe de colaborar se você quiser!
 Existem três formas de colaborar com o projeto:
 ### Com conteúdo
-Se você conhece algum recurso legal para aprendizes ou desenvolvedores e gostaria de compartilhar, abra um pull request para adicionar um novo registro. Os registros são simples objetos armazenados em um vetor no arquivo registros.js.
+Se você conhece algum recurso legal para aprendizes ou desenvolvedores e gostaria de compartilhar, abra um pull request para adicionar um novo registro. Os registros são simples objetos armazenados em um array no arquivo GlobalContext.jsx.
 A estrutura dos objetos é: 
 - { id: 1, nome: '', tipo: 'normal', categoria: '', descricao: '', link: '', tags: [] },
 
-As categorias ajudam o usuário a filtrar o conteúdo por tipo de mídia, as tags servem pra filtrar por coisas mais pontuais como assuntos, tecnologias... 
+As categorias ajudam o usuário a filtrar o conteúdo por tipo de mídia, as tags servem pra filtrar por coisas mais pontuais como assuntos, tecnologias, temas... 
 
-Categorias disponíveis até agora => Curso Youtube, Curso, Sites, Carreira, Canal YouTube, Jogos, Repositórios, Imagens, Ferramentas, Livros, Exercícios, Fóruns, Podcasts, Balaio, Redes.
+Categorias disponíveis até agora => Curso, Sites, Carreira, Canal YouTube, Jogos, Repositórios, Imagens, Ferramentas, Livros, Exercícios, Fóruns, Podcasts, Balaio, Redes.
 
 
 ### Participando do desenvolvimento
-Além do propósito de divulgar coisas legais e ajudar a galera, este projeto também serve de laboratório. Se quiser contribuir implementando novas funcionalidades ou melhorando as gambiarras existentes, seja muito bem vindo com seu pull request!
+Além do propósito de divulgar coisas legais e ajudar a galera, este projeto também ode te servir de laboratório. Se quiser contribuir implementando novas funcionalidades ou melhorando as gambiarras existentes, seja muito bem vindo com seu pull request!
 
 ### Dando uma estrelinha
 Dev biscoitero precisa de estrelinha no repositório. Joga uma aí vai...
@@ -57,6 +57,6 @@ Dev biscoitero precisa de estrelinha no repositório. Joga uma aí vai...
 Quer meter um pull request de respeito? Eis o que ainda tem pendente do escopo original:
 - input de pesquisa para procurar uma string nos campos Nome, Tags e Descrição;
 - Acessibilidade;
-- Responsividade;
+- Modo dark;
 - Backend para poder cadastrar novos recursos via web, não mais que um minilito.
 
