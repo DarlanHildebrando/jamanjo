@@ -7,7 +7,7 @@ Meu antigo site para divulgação de recursos para meus alunos era o site mais b
 Costumo dizer que meu maior problema é a combinação de excesso de criatividade com total ausência de senso estético.
 Por mais que eu não concorde, consigo entender as pessoas que não estavam preparadas para entender a genialidade do design do projeto anterior :D
 
-O JAMANJO nasceu da vontade que criar algo mais comum, mais natural e 'lugar comum' para todas as pessoas.
+O JAMANJO nasceu da vontade que criar algo mais normal, mais natural e 'lugar comum' para todas as pessoas.
 
 *** tecnologias
 
