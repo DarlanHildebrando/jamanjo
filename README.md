@@ -17,7 +17,7 @@ Agora, ele está aos poucos virando uma página web, pra ficar mais organizado e
 <!-- ![Logo placa](public/img/jamanjo.svg) -->
 <!-- [![Descrição da imagem](public/img/jamanjo.svg)](https://www.jamanjo.com.br) -->
 <a href="https://www.jamanjo.com.br">
-  <img src="https://github.com/rafaellindemann/jamanjo/public/img/Jamanjo.svg" alt="Descrição da imagem" width="200" height="auto" style="border: 1px solid #000;" />
+  <img src="https://github.com/rafaellindemann/jamanjo/tree/main/public/img/Jamanjo.svg" alt="Descrição da imagem" width="200" height="auto" style="border: 1px solid #000;" />
 </a>
 
 
