@@ -1,8 +1,6 @@
 
 # JAMANJO
 
-*** img sem fundo e bordas para o logo no header
-*** img de 400px para o readme
 
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![MUI](https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=mui&logoColor=white)](https://mui.com/)
@@ -20,11 +18,10 @@ Por mais que eu não concorde, consigo entender as pessoas que não estavam prep
 
 O JAMANJO nasceu então da vontade de criar algo mais normal, mais natural e 'lugar comum' para todas as pessoas. Ahhh, claro que a ideia do nome/identidade veio enquanto eu tava assistindo um filme aí...
 
-<!-- ![Logo placa](public/img/jamanjo.svg) -->
-<!-- [![Descrição da imagem](public/img/jamanjo.svg)](https://www.jamanjo.com.br) -->
-<a href="https://www.jamanjo.com.br">
+[![Descrição da imagem](public/img/jamanjo.svg)](https://www.jamanjo.com.br)
+<!-- <a href="https://www.jamanjo.com.br">
   <img src="./public/img/Jamanjo.svg" alt="Descrição da imagem" width="200" height="auto" style="border: 1px solid #000;" />
-</a>
+</a> -->
 
 
 ## Histórico do projeto
@@ -52,6 +49,9 @@ Além do propósito de divulgar coisas legais e ajudar a galera, este projeto ta
 
 ### Dando uma estrelinha
 Dev biscoitero precisa de estrelinha no repositório. Joga uma aí vai...
+
+### Procedimento detalhado para contribuir
+Se tu não sabe como fazer pra meter os pitacos no código ou conteúdo, pode dar uma espiada [aqui neste arquivo](CONTRIBUTING.md).
 
 ## Futuras empreitadas/issues 
 Quer meter um pull request de respeito? Eis o que ainda tem pendente do escopo original:
