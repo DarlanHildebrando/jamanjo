@@ -5,6 +5,7 @@ import { GlobalContext } from '../contexts/GlobalContext';
 import Card from './Card';
 import { motion, AnimatePresence } from 'framer-motion';
 
+
 // Componente Card envolvido com motion
 const MotionCard = motion.create(({ resource, ...rest }) => (
   <div {...rest}>
@@ -90,6 +91,7 @@ function Body() {
         // borderRadius: 20,
       }}
     >
+
       <Container maxWidth="xl">
         <AnimatePresence>
           <Masonry 
