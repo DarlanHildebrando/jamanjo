@@ -214,6 +214,7 @@ export const GlobalContextProvider = ({ children }) => {
   ];
 
   const [filteredResources, setFilteredResources] = useState(resources);
+  const [filteredBySearch, setFilteredBySearch] = useState([]);
   const [filters, setFilters] = useState([]);
   const [selectedTag, setSelectedTag] = useState(null);
 
@@ -257,12 +258,24 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
+  const search = (pesquisa) =>{
+
+    const resultadosFiltrados = resources.filter(resource =>
+    resource.nome.toLowerCase().startsWith(pesquisa.toLowerCase()))
+
+    setFilteredBySearch(resultadosFiltrados)
+
+    console.log(resultadosFiltrados)
+
+  }
+
   return (
     <GlobalContext.Provider value={{
       resources, categories,
-      filteredResources, setFilteredResources,
+      filteredResources, setFilteredResources, filteredBySearch, setFilteredBySearch,
       filters, setFilters,
-      handleFilter, handleTagFilter, selectedTag, clearFilters
+      handleFilter, handleTagFilter, selectedTag, clearFilters,
+      search
     }}>
       {children}
     </GlobalContext.Provider>
