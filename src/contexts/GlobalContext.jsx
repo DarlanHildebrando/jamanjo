@@ -214,6 +214,7 @@ export const GlobalContextProvider = ({ children }) => {
   ];
 
   const [filteredResources, setFilteredResources] = useState(resources);
+  const [filteredBySearch, setFilteredBySearch] = useState([]);
   const [filters, setFilters] = useState([]);
   const [selectedTag, setSelectedTag] = useState(null);
 
@@ -257,12 +258,47 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
+  function debounce(func, delay) {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), delay);
+    };
+  }
+  
+
+  const search = debounce((pesquisa) => {
+
+  
+
+    const normalizar = (texto) =>
+      texto
+        ?.normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\w\s]/gi, "")
+        .toLowerCase();
+  
+    const pesquisaNormalizada = normalizar(pesquisa);
+  
+    const resultadosFiltrados = resources.filter(resource =>
+      normalizar(resource.nome).includes(pesquisaNormalizada) ||
+      (Array.isArray(resource.tags) && resource.tags.some(tag =>
+        normalizar(tag).includes(pesquisaNormalizada)
+      ))  ||
+      normalizar(resource.descricao).includes(pesquisaNormalizada)
+    );
+  
+    setFilteredBySearch(resultadosFiltrados);
+    console.log(resultadosFiltrados);
+  }, 300);
+  
   return (
     <GlobalContext.Provider value={{
       resources, categories,
-      filteredResources, setFilteredResources,
+      filteredResources, setFilteredResources, filteredBySearch, setFilteredBySearch,
       filters, setFilters,
-      handleFilter, handleTagFilter, selectedTag, clearFilters
+      handleFilter, handleTagFilter, selectedTag, clearFilters,
+      search
     }}>
       {children}
     </GlobalContext.Provider>

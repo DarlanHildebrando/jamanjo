@@ -14,7 +14,7 @@ const MotionCard = motion.create(({ resource, ...rest }) => (
 ));
 
 function Body() {
-  const { categories, resources, handleFilter, filteredResources, setFilteredResources } = useContext(GlobalContext);
+  const { categories, resources, handleFilter, filteredResources, setFilteredResources, filteredBySearch, setFilteredBySearch } = useContext(GlobalContext);
   const [visibleItems, setVisibleItems] = useState([]);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   
@@ -64,6 +64,13 @@ function Body() {
       return () => clearTimeout(timer);
     }
   }, [filteredResources, isInitialLoad]);
+
+  useEffect(() => {
+
+    setVisibleItems(filteredBySearch)
+
+
+  }, [filteredBySearch])
 
   const cardVariants = {
     hidden: { opacity: 0, scale: 0.8 },
