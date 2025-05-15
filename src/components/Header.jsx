@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -58,17 +58,24 @@ function Header() {
   };
 
   return (
-    <AppBar
-      position="static"
-      sx={{
-        backgroundColor: "snow",
-        bgcolor: '#6B8E23', 
-        backgroundImage: `url('/forest-2.svg')`,
-        color: "text.primary",
-        boxShadow: 1,
-        padding: 1,
-      }}
-    >
+
+<AppBar
+  sx={{
+    position: 'relative',
+    backgroundImage: "url('/jungle-pattern.svg')",
+    backgroundSize: 'auto',
+    backgroundRepeat: 'repeat',
+    color: 'white',
+    zIndex: 1,
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      inset: 0,
+      backgroundColor: 'rgba(76, 175, 79, 0.5)', 
+      zIndex: -1,
+    },
+  }}
+> 
       <Toolbar
         sx={{
           display: "flex",
@@ -100,7 +107,7 @@ function Header() {
               src="./img/JAMANJO-2-23-2025.png"
               // src="./img/Jamanjo-placa-logo.png"
               alt="logo progHub"
-              style={{ height: "40px" }}
+              style={{ height: "40px", filter: "drop-shadow(0 0 0.75rem black)" }}
             />
           </Box>
 
@@ -127,7 +134,7 @@ function Header() {
             )}
 
             {/* Contador de registros */}
-            <Typography variant="body1" sx={{ color: 'white' }} >
+            <Typography variant="body1" sx={{ color: 'white',textShadow: "0px 0px 14px black"}} >
               {filteredResources.length}/{resources.length}
             </Typography>
           </Box>
@@ -149,7 +156,8 @@ function Header() {
               }}
             >
               <IconButton
-                color="secondary"
+                color="primary"
+                sx={{ color: 'white' }}
                 aria-label="menu"
                 onClick={handleMenuClick}
               >
@@ -165,7 +173,7 @@ function Header() {
                       backgroundColor: isCategorySelected(category) ? 'rgba(255, 255, 255, 0.2)' : 'inherit',
                       "&.Mui-selected": {
                         color: "secondary.main",
-                        fontWeight: "bold",
+                        fontWeight: "bold"
                       }
                     }}
                   >
@@ -181,6 +189,7 @@ function Header() {
               color="primary"
               sx={{
                 flexWrap: "wrap",
+                
                 "& .MuiButtonGroup-grouped": {
                   margin: "4px 2px",
                 },
@@ -191,9 +200,11 @@ function Header() {
                   key={category} 
                   onClick={() => toggleFilter(category)}
                   sx={{
+                    textShadow: "0px 0px 14px black",
                     color: isCategorySelected(category) ? "secondary.main" : "white",
                     fontWeight: isCategorySelected(category) ? "bold" : "normal",
-                    backgroundColor: isCategorySelected(category) ? 'rgba(255, 255, 255, 0.2)' : 'inherit',
+                    backgroundColor: isCategorySelected(category) ? 'rgba(255, 255, 255, 0.56)' : 'rgba(76, 150, 80, 0.48)',
+                    // backgroundColor: isCategorySelected(category) ? 'rgba(255, 255, 255, 0.2)' : 'inherit',
                     '&:hover': {
                       backgroundColor: isCategorySelected(category) ? 'rgba(255, 255, 255, 0.3)' : 'rgba(255, 255, 255, 0.1)'
                     }

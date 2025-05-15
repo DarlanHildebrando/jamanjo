@@ -51,7 +51,7 @@ Além do propósito de divulgar coisas legais e ajudar a galera, este projeto ta
 Dev biscoitero precisa de estrelinha no repositório. Joga uma aí vai...
 
 ### Procedimento detalhado para contribuir
-Se tu não sabe como fazer pra meter os pitacos no código ou conteúdo, pode dar uma espiada [aqui neste arquivo](CONTRIBUTING.md).
+Se tu não sabe como fazer pra meter os pitacos no código ou conteúdo, pode dar uma espiada [aqui neste arquivo](./contributing.md).
 
 ## Futuras empreitadas/issues 
 Quer meter um pull request de respeito? Eis o que ainda tem pendente do escopo original:
