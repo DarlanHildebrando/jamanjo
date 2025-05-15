@@ -1,5 +1,5 @@
 import React from 'react'
-import { Paper, InputBase, Box, useTheme } from '@mui/material'
+import { Paper, InputBase, Box} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 
 function Searchbar() {
