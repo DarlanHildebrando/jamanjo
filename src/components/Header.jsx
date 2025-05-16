@@ -200,13 +200,16 @@ function Header() {
                   key={category} 
                   onClick={() => toggleFilter(category)}
                   sx={{
-                    textShadow: "0px 0px 14px black",
+                    // textShadow: "0px 0px 14px black",
+                    textShadow: isCategorySelected(category) ? "0px 0px 14px white" : "0px 0px 14px black",
                     color: isCategorySelected(category) ? "secondary.main" : "white",
                     fontWeight: isCategorySelected(category) ? "bold" : "normal",
                     backgroundColor: isCategorySelected(category) ? 'rgba(255, 255, 255, 0.56)' : 'rgba(76, 150, 80, 0.48)',
                     // backgroundColor: isCategorySelected(category) ? 'rgba(255, 255, 255, 0.2)' : 'inherit',
                     '&:hover': {
-                      backgroundColor: isCategorySelected(category) ? 'rgba(255, 255, 255, 0.3)' : 'rgba(255, 255, 255, 0.1)'
+                      backgroundColor: isCategorySelected(category) ? 'rgba(255, 255, 255, 0.3)' : 'rgba(155, 255, 155, 0.37)',
+                      textShadow: "0px 0px 14px green",
+                      borderRadius: 2,
                     }
                   }}
                 >

@@ -85,8 +85,13 @@ function Body() {
         color: 'text.primary',
         minHeight: '100vh',
         py: 3,
+        // borderLeft: '30px solid #6B8E23',
+        // borderRight: '30px solid #4caf50',
+        // borderBottom: '30px solid #4caf50',
+
         // boxShadow: 'inset 0px 0px 10px 10px #8B4513',
-        // boxShadow: 'inset 0px 0px 10px 10px #6B8E23',
+        // boxShadow: 'inset 0px 0px 20px 10px #4caf50',
+        boxShadow: 'inset 0px 0px 20px 10px #6B8E23',
         // borderRadius: 20,
       }}
     >
