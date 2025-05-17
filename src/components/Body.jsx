@@ -70,8 +70,8 @@ function Body() {
       opacity: 1,
       scale: 1,
       transition: {
-        delay: i * 0.05, // Reduzido para acelerar a animação
-        duration: 0.3,
+        delay: i * 0.01,  // 0.05 <--- este delay aqui é acumulativo por índice
+        duration: 0.05,   // 0.3  <--- e aqui é quanto tempo a transição leva
         ease: "easeOut"
       }
     }),

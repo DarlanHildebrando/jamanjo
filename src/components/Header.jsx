@@ -134,7 +134,14 @@ function Header() {
             )}
 
             {/* Contador de registros */}
-            <Typography variant="body1" sx={{ color: 'white',textShadow: "0px 0px 14px black"}} >
+            <Typography variant="body1" sx={{ 
+              color: 'white',
+              fontWeight: "bold",
+              padding: "4px 8px",
+              borderRadius: 2,
+              textShadow: "0px 0px 24px black",
+              backgroundColor:  'rgba(35, 185, 35, 0.3)'
+              }} >
               {filteredResources.length}/{resources.length}
             </Typography>
           </Box>
