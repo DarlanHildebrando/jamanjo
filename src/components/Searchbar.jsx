@@ -19,7 +19,7 @@ function Searchbar() {
       height: "60px",
       bgcolor: "snow",
       display: "flex",
-      justifyContent: "center"
+      justifyContent: "center",
     }}>
 
   

@@ -20,7 +20,7 @@ import { GlobalContext } from "../contexts/GlobalContext";
 function Header() {
   const { 
     categories, resources, handleFilter, filters, filteredResources, 
-    handleTagFilter, selectedTag, clearFilters 
+    handleTagFilter, selectedTag, clearFilters, searchValue
   } = useContext(GlobalContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -96,7 +96,7 @@ function Header() {
         >
           {/* Logo à esquerda */}
           <Box
-            onClick={clearFilters} // Limpa todos os filtros ao clicar no logo
+            onClick={clearFilters(searchValue)} // Limpa todos os filtros ao clicar no logo
             sx={{
               cursor: "pointer",
               display: "flex",
@@ -166,7 +166,7 @@ function Header() {
                 color="primary"
                 sx={{ color: 'white' }}
                 aria-label="menu"
-                onClick={handleMenuClick}
+                onClick={handleMenuClick(sear)}
               >
                 <MenuIcon />
               </IconButton>

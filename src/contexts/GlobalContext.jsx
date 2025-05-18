@@ -5,6 +5,7 @@ import { createContext, useEffect, useState } from "react";
 export const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
+    
   const resources = [
     { id: 1, nome: '🌳🌳 Curso em Vídeo, HTML5 e CSS3, Módulo 1/5', imagem: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXU1M2Nxd2dwYzYzbmRqYzE2dWhrdDEwZG1wM3FoOHdjazE4czZndiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L0NvsV1pBDRCcVQBGY/giphy.gif', tipo: 'normal', categoria: 'Curso', descricao: 'O primeiro módulo do melhor curso de front para iniciantes, pelo melhor professor do mundo.', link: 'https://www.youtube.com/watch?v=Ejkb_YpuHWs&list=PLHz_AreHm4dkZ9-atkcmcBaMZdmLHft8n&ab_channel=CursoemV%C3%ADdeo', tags: ['HTML', 'CSS', 'Curso', 'Youtube', 'Guanabara', 'CursoEmVídeo', 'SentaEAssiste', 'Obrigatório', 'Juninho'] },
     { id: 14, nome: '🌳 Dicionário do programador, do CódigoFonteTV', imagem: '', tipo: 'normal', categoria: 'Canal', descricao: 'Melhor oportunidade para ouvir falar das principais tecnologias do momento e acumlar aquele arsenal de argumentos para uma entrevista ou conversa de boteco.', link: 'https://www.youtube.com/watch?v=hlgm_1Bzt-4&list=PLVc5bWuiFQ8GgKm5m0cZE6E02amJho94o&ab_channel=C%C3%B3digoFonteTV', tags: ['CulturaDev'] },
@@ -226,11 +227,21 @@ export const GlobalContextProvider = ({ children }) => {
   // }, [filters]);
 
   // Função para limpar todos os filtros
-  const clearFilters = () => {
+  const clearFilters = (overrideSearch) => {
 
     setFilters([]);
     setSelectedTag(null);
+
+    console.log(overrideSearch)
+
+    const pesquisa = overrideSearch.trim();
+
+  if (pesquisa) {
+    const resultadosFiltrados = applySearchFilter(resources, pesquisa);
+    setFilteredResources(resultadosFiltrados);
+  } else {
     setFilteredResources(resources);
+  }
 
   };
 
@@ -340,7 +351,7 @@ export const GlobalContextProvider = ({ children }) => {
       filteredResources, setFilteredResources, filteredBySearch, setFilteredBySearch,
       filters, setFilters,
       handleFilter, handleTagFilter, selectedTag, clearFilters,
-      search
+      search, searchValue
     }}>
       {children}
     </GlobalContext.Provider>
