@@ -227,7 +227,7 @@ export const GlobalContextProvider = ({ children }) => {
 
   // Função para limpar todos os filtros
   const clearFilters = () => {
-    
+
     setFilters([]);
     setSelectedTag(null);
     setFilteredResources(resources);
@@ -249,7 +249,7 @@ export const GlobalContextProvider = ({ children }) => {
 
       setFilteredResources(filtered);
       setFilters([category]);
-      setSelectedTag(null); // Limpa a tag ao aplicar filtro de categoria
+      setSelectedTag(null); // Limpa a tag ao aplicar filtro de catgegoria
     } else {
       clearFilters(); // Limpa todos os filtros
     }
