@@ -96,7 +96,7 @@ function Header() {
         >
           {/* Logo à esquerda */}
           <Box
-            onClick={clearFilters(searchValue)} // Limpa todos os filtros ao clicar no logo
+            onClick={() => clearFilters(searchValue)} // Limpa todos os filtros ao clicar no logo
             sx={{
               cursor: "pointer",
               display: "flex",
@@ -125,7 +125,7 @@ function Header() {
               <Tooltip title="Limpar Filtros" arrow>
                 <IconButton 
                   color="secondary" 
-                  onClick={clearFilters} // Limpa todos os filtros
+                  onClick={() => clearFilters(searchValue)} // Limpa todos os filtros
                   sx={{ color: 'white' }}
                 >
                   <FilterAltOffIcon />

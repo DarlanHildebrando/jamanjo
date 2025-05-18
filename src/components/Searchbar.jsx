@@ -1,47 +1,63 @@
-import React, { useContext, useState } from 'react'
-import { Paper, InputBase, Box, useTheme } from '@mui/material'
+import React, { useContext } from 'react';
+import { Paper, InputBase, Box, useTheme, useMediaQuery } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { GlobalContext } from '../contexts/GlobalContext';
 
 function Searchbar() {
+  const { search } = useContext(GlobalContext);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const {search} = useContext(GlobalContext)
-
-  function handleSearch(value){
-
-    search(value)
-
+  function handleSearch(value) {
+    search(value);
   }
 
   return (
-
-    <Box sx={{
-      height: "60px",
-      bgcolor: "snow",
-      display: "flex",
-      justifyContent: "center",
-    }}>
-
-  
+    <Box
+      sx={{
+        height: 'auto',
+        bgcolor: 'snow',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        mt: '10px',
+        mb: '10px',
+        px: 2, // padding horizontal para mobile
+        position: 'relative',
+      }}
+    >
       <Paper
         sx={{
-          width: "30%",
-          bgcolor: "snow",
-          mt: "15px",
-          padding: "8px",
-          display: "flex",
-          justifyContent: "space-between"
-        }} elevation={10}>
-
-        <InputBase placeholder='Pesquise' fullWidth onChange={(e) => {const value = e.target.value; handleSearch(value);}}></InputBase>
-
-        <SearchIcon color='primary' sx={{ fontSize: "30px"}}/>
-
+          width: '100%',
+          maxWidth: '600px',
+          bgcolor: 'snow',
+          px: 2,
+          py: 1,
+          display: 'flex',
+          alignItems: 'center',
+          zIndex: 2,
+          height: isMobile ? '50px' : '60px',
+        }}
+        elevation={10}
+      >
+        <InputBase
+          placeholder="Pesquise"
+          fullWidth
+          sx={{
+            fontSize: isMobile ? '16px' : '18px',
+          }}
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+        <SearchIcon
+          color="action"
+          sx={{
+            fontSize: isMobile ? '24px' : '30px',
+            ml: 1,
+          }}
+        />
       </Paper>
-
     </Box>
-
-  )
+  );
 }
 
-export default Searchbar
+export default Searchbar;

@@ -5,6 +5,7 @@ import { GlobalContext } from '../contexts/GlobalContext';
 import Card from './Card';
 import { motion, AnimatePresence } from 'framer-motion';
 import Searchbar from './Searchbar';
+import NotFound from './NotFound';
 
 
 // Componente Card envolvido com motion
@@ -18,7 +19,9 @@ function Body() {
   const { categories, resources, handleFilter, filteredResources, setFilteredBySearch } = useContext(GlobalContext);
   const [visibleItems, setVisibleItems] = useState([]);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
-  
+  const [searchNotFound, setNotFound] = useState(false)
+
+
   // Calculando colunas responsivas
   const getColumnCount = () => {
     if (window.innerWidth < 600) return 1; // xs
@@ -56,12 +59,12 @@ function Body() {
     } else {
       // Mudança de filtro - reset e animação
       setVisibleItems([]);
-      
       // Pequena pausa antes de mostrar os novos itens
       const timer = setTimeout(() => {
         setVisibleItems(filteredResources);
+        setNotFound(filteredResources.length === 0);
       }, 100);
-      
+
       return () => clearTimeout(timer);
     }
   }, [filteredResources, isInitialLoad]);
@@ -81,17 +84,18 @@ function Body() {
     exit: { opacity: 0, scale: 0.8, transition: { duration: 0.2 } }
   };
 
+
   return (
-    <Box 
-      sx={{ 
-        bgcolor: 'snow', 
+    <Box
+      sx={{
+        bgcolor: 'snow',
         color: 'text.primary',
         minHeight: '100vh',
         py: 3,
         // borderLeft: '30px solid #6B8E23',
         // borderRight: '30px solid #4caf50',
         // borderBottom: '30px solid #4caf50',
-
+        px: { xs: 2, sm: 4 },
         // boxShadow: 'inset 0px 0px 10px 10px #8B4513',
         // boxShadow: 'inset 0px 0px 20px 10px #4caf50',
         boxShadow: 'inset 0px 0px 20px 10px #6B8E23',
@@ -99,28 +103,34 @@ function Body() {
       }}
     >
 
-      <Searchbar/>
+      <Searchbar />
 
       <Container maxWidth="xl">
         <AnimatePresence>
-          <Masonry 
-            columns={columns} 
+          <Masonry
+            columns={columns}
             spacing={2}
             sx={{ margin: 0 }}
           >
-            {visibleItems.map((resource, index) => (
-              <MotionCard
-                key={resource.id}
-                resource={resource}
-                custom={Math.min(index, 10)} // Limita o atraso máximo
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={cardVariants}
-                layout
-                whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
-              />
-            ))}
+            {searchNotFound ? (
+
+              <NotFound />
+              
+            ) : (
+              visibleItems.map((resource, index) => (
+                <MotionCard
+                  key={resource.id}
+                  resource={resource}
+                  custom={Math.min(index, 10)}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={cardVariants}
+                  layout
+                  whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+                />
+              ))
+            )}
           </Masonry>
         </AnimatePresence>
       </Container>

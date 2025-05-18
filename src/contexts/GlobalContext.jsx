@@ -5,7 +5,7 @@ import { createContext, useEffect, useState } from "react";
 export const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
-    
+
   const resources = [
     { id: 1, nome: '🌳🌳 Curso em Vídeo, HTML5 e CSS3, Módulo 1/5', imagem: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXU1M2Nxd2dwYzYzbmRqYzE2dWhrdDEwZG1wM3FoOHdjazE4czZndiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L0NvsV1pBDRCcVQBGY/giphy.gif', tipo: 'normal', categoria: 'Curso', descricao: 'O primeiro módulo do melhor curso de front para iniciantes, pelo melhor professor do mundo.', link: 'https://www.youtube.com/watch?v=Ejkb_YpuHWs&list=PLHz_AreHm4dkZ9-atkcmcBaMZdmLHft8n&ab_channel=CursoemV%C3%ADdeo', tags: ['HTML', 'CSS', 'Curso', 'Youtube', 'Guanabara', 'CursoEmVídeo', 'SentaEAssiste', 'Obrigatório', 'Juninho'] },
     { id: 14, nome: '🌳 Dicionário do programador, do CódigoFonteTV', imagem: '', tipo: 'normal', categoria: 'Canal', descricao: 'Melhor oportunidade para ouvir falar das principais tecnologias do momento e acumlar aquele arsenal de argumentos para uma entrevista ou conversa de boteco.', link: 'https://www.youtube.com/watch?v=hlgm_1Bzt-4&list=PLVc5bWuiFQ8GgKm5m0cZE6E02amJho94o&ab_channel=C%C3%B3digoFonteTV', tags: ['CulturaDev'] },
@@ -218,7 +218,8 @@ export const GlobalContextProvider = ({ children }) => {
   const [filteredBySearch, setFilteredBySearch] = useState([]);
   const [filters, setFilters] = useState([]);
   const [selectedTag, setSelectedTag] = useState(null);
-  const [searchValue, setSearchValue] = useState('')
+  const [searchValue, setSearchValue] = useState('');
+  
 
 
   // useEffect(() => {
@@ -232,16 +233,23 @@ export const GlobalContextProvider = ({ children }) => {
     setFilters([]);
     setSelectedTag(null);
 
-    console.log(overrideSearch)
+    let searchText = '';
 
-    const pesquisa = overrideSearch.trim();
+    // Verifica se overrideSearch é uma string
+    if (typeof overrideSearch === 'string') {
+      searchText = overrideSearch.trim();
+    }
+    // Se não for string e for um objeto com target.value (ex: SyntheticEvent), tenta extrair o valor
+    else if (typeof overrideSearch === 'object' && overrideSearch?.target?.value) {
+      searchText = overrideSearch.target.value.toString().trim();
+    }
 
-  if (pesquisa) {
-    const resultadosFiltrados = applySearchFilter(resources, pesquisa);
-    setFilteredResources(resultadosFiltrados);
-  } else {
-    setFilteredResources(resources);
-  }
+    if (searchText) {
+      const searchResults = applySearchFilter(resources, searchText);
+      setFilteredResources(searchResults);
+    } else {
+      setFilteredResources(resources);
+    }
 
   };
 
@@ -252,10 +260,13 @@ export const GlobalContextProvider = ({ children }) => {
         resource.categoria === category || resource.tipo === 'ad'
       );
 
-      const pesquisa = overrideSearch ?? searchValue;
+      /** Define o termo de pesquisa como overrideSearch, se fornecido, ou searchValue como padrão.
+       * Aplica o filtro de busca somente se o termo não for vazio após remover espaços.
+       */
+      const searchText = overrideSearch ?? searchValue;
 
-      if (pesquisa?.trim()) {
-        filtered = applySearchFilter(filtered, pesquisa);
+      if (searchText?.trim()) {
+        filtered = applySearchFilter(filtered, searchText);
       }
 
       setFilteredResources(filtered);
@@ -273,10 +284,13 @@ export const GlobalContextProvider = ({ children }) => {
         resource.tags && resource.tags.includes(tag) || resource.tipo === 'ad'
       );
 
-      const pesquisa = overrideSearch ?? searchValue;
+      /** Define o termo de pesquisa como overrideSearch, se fornecido, ou searchValue como padrão.
+       * Aplica o filtro de busca somente se o termo não for vazio após remover espaços.
+       */
+      const searchText = overrideSearch ?? searchValue;
 
-      if (pesquisa?.trim()) {
-        filtered = applySearchFilter(filtered, pesquisa);
+      if (searchText?.trim()) {
+        filtered = applySearchFilter(filtered, searchText);
       }
 
       setFilteredResources(filtered);
@@ -295,31 +309,32 @@ export const GlobalContextProvider = ({ children }) => {
     };
   }
 
-  const applySearchFilter = (lista, texto) => {
-    const normalizar = (texto) =>
-      texto
-        ?.normalize("NFD")
+  const applySearchFilter = (lista, text) => {
+    const normalizar = (text) =>
+      text
+        ?.trim()
+        .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^\w\s]/gi, "")
         .toLowerCase();
 
-    const pesquisaNormalizada = normalizar(texto);
+    const normalizedSearch = normalizar(text);
 
     return lista.filter(resource =>
-      normalizar(resource.nome).includes(pesquisaNormalizada) ||
+      normalizar(resource.nome).includes(normalizedSearch) ||
       (Array.isArray(resource.tags) && resource.tags.some(tag =>
-        normalizar(tag).includes(pesquisaNormalizada)
+        normalizar(tag).includes(normalizedSearch)
       )) ||
-      normalizar(resource.descricao).includes(pesquisaNormalizada)
+      normalizar(resource.descricao).includes(normalizedSearch)
     );
   };
 
-  const search = debounce((pesquisa) => {
+  const search = debounce((searchText) => {
 
 
-    setSearchValue(pesquisa)
+    setSearchValue(searchText)
 
-    if (pesquisa.trim()) {
+    if (searchText.trim()) {
 
       let base = resources;
 
@@ -329,15 +344,15 @@ export const GlobalContextProvider = ({ children }) => {
         base = base.filter(r => r.tags?.includes(selectedTag) || r.tipo === 'ad');
       }
 
-      const resultadosFiltrados = applySearchFilter(base, pesquisa);
-      setFilteredResources(resultadosFiltrados);
+      const searchResults = applySearchFilter(base, searchText);
+      setFilteredResources(searchResults);
     } else {
       if (filters.length > 0) {
-        handleFilter(filters[0], pesquisa);
+        handleFilter(filters[0], searchText);
       } else if (selectedTag) {
-        handleTagFilter(selectedTag, pesquisa);
+        handleTagFilter(selectedTag, searchText);
       } else {
-        clearFilters(pesquisa);
+        clearFilters();
       }
     }
 
