@@ -33,7 +33,6 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
         <Header />
-        <Searchbar/>
         <Body />
     </ThemeProvider>
   )
