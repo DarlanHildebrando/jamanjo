@@ -22,7 +22,6 @@ function Searchbar() {
         alignItems: 'center',
         mt: '10px',
         mb: '10px',
-        px: 2, // padding horizontal para mobile
         position: 'relative',
       }}
     >
@@ -41,7 +40,7 @@ function Searchbar() {
         elevation={10}
       >
         <InputBase
-          placeholder="Pesquise"
+          placeholder="Pesquise aqui..."
           fullWidth
           sx={{
             fontSize: isMobile ? '16px' : '18px',
@@ -49,7 +48,7 @@ function Searchbar() {
           onChange={(e) => handleSearch(e.target.value)}
         />
         <SearchIcon
-          color="action"
+          color="secondary"
           sx={{
             fontSize: isMobile ? '24px' : '30px',
             ml: 1,

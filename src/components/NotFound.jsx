@@ -10,9 +10,8 @@ function NotFound() {
       alignItems="center"
       justifyContent="center"
       textAlign="center"
-      width="100%"
     >
-      <SearchOffIcon color='primary' sx={{ fontSize: 150, mb: 2 }} />
+      <SearchOffIcon color='primary' sx={{ fontSize: 150 }} />
       <Typography variant="h4" component="h1" gutterBottom>
         Não encontrado
       </Typography>

@@ -59,6 +59,7 @@ function Body() {
     } else {
       // Mudança de filtro - reset e animação
       setVisibleItems([]);
+      
       // Pequena pausa antes de mostrar os novos itens
       const timer = setTimeout(() => {
         setVisibleItems(filteredResources);
@@ -68,7 +69,6 @@ function Body() {
       return () => clearTimeout(timer);
     }
   }, [filteredResources, isInitialLoad]);
-
 
   const cardVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -84,7 +84,6 @@ function Body() {
     exit: { opacity: 0, scale: 0.8, transition: { duration: 0.2 } }
   };
 
-
   return (
     <Box
       sx={{
@@ -95,6 +94,7 @@ function Body() {
         // borderLeft: '30px solid #6B8E23',
         // borderRight: '30px solid #4caf50',
         // borderBottom: '30px solid #4caf50',
+        px: { xs: 2, sm: 4 },
         // boxShadow: 'inset 0px 0px 10px 10px #8B4513',
         // boxShadow: 'inset 0px 0px 20px 10px #4caf50',
         boxShadow: 'inset 0px 0px 20px 10px #6B8E23',
@@ -106,35 +106,44 @@ function Body() {
 
       <Container maxWidth="xl">
         <AnimatePresence>
-          <Masonry
-            columns={columns}
-            spacing={2}
-            sx={{ margin: 0 }}
-          >
-            {searchNotFound ? (
 
-              <NotFound />
-              
-            ) : (
-              visibleItems.map((resource, index) => (
-                <MotionCard
-                  key={resource.id}
-                  resource={resource}
-                  custom={Math.min(index, 10)}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  variants={cardVariants}
-                  layout
-                  whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
-                />
-              ))
-            )}
-          </Masonry>
-        </AnimatePresence>
+  {/*Renderização condicional, searchNotFound muda de estado com setNotFound(filteredResources.length === 0); 
+  no UseEffect monitorado por filteredResources e IsInitiaLoad*/}
+  {searchNotFound ? (
+    //Caso searchbar não encontre nenhuma informação, exibe componente de não encontrado (NotFound)
+    //Não é adicionada dentro de mansory pois suas propriedades afetam negativamente o componente NotFound
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="60vh"
+    >
+      <NotFound />
+    </Box>
+  ) : (
+    //Mansory só é renderizada caso visibleItems.length seja maior que 0
+    <Masonry columns={columns} spacing={2}>
+      {visibleItems.map((resource, index) => (
+        <MotionCard
+          key={resource.id}
+          resource={resource}
+          custom={Math.min(index, 10)}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          variants={cardVariants}
+          layout
+          whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+        />
+      ))}
+    </Masonry>
+  )}
+</AnimatePresence>
+
       </Container>
     </Box>
   );
 }
 
 export default Body;
+

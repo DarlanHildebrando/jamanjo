@@ -219,7 +219,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [filters, setFilters] = useState([]);
   const [selectedTag, setSelectedTag] = useState(null);
   const [searchValue, setSearchValue] = useState('');
-  
+
 
 
   // useEffect(() => {
@@ -244,6 +244,7 @@ export const GlobalContextProvider = ({ children }) => {
       searchText = overrideSearch.target.value.toString().trim();
     }
 
+    //Caso a searchbar tenha alguma informação, faz a busca automaticamente após a remoção dos filtros
     if (searchText) {
       const searchResults = applySearchFilter(resources, searchText);
       setFilteredResources(searchResults);
@@ -261,8 +262,7 @@ export const GlobalContextProvider = ({ children }) => {
       );
 
       /** Define o termo de pesquisa como overrideSearch, se fornecido, ou searchValue como padrão.
-       * Aplica o filtro de busca somente se o termo não for vazio após remover espaços.
-       */
+       Aplica o filtro de busca somente se o termo não for vazio após remover espaços. */
       const searchText = overrideSearch ?? searchValue;
 
       if (searchText?.trim()) {
@@ -285,8 +285,7 @@ export const GlobalContextProvider = ({ children }) => {
       );
 
       /** Define o termo de pesquisa como overrideSearch, se fornecido, ou searchValue como padrão.
-       * Aplica o filtro de busca somente se o termo não for vazio após remover espaços.
-       */
+       * Aplica o filtro de busca somente se o termo não for vazio após remover espaços. */
       const searchText = overrideSearch ?? searchValue;
 
       if (searchText?.trim()) {
@@ -301,6 +300,10 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
+  /** 
+ * Debounce em JavaScript puro.
+ * Garante que a função search só seja executada após o usuário parar de digitar 
+ * por um período específico (definido dentro da própria função search).*/
   function debounce(func, delay) {
     let timeout;
     return (...args) => {
@@ -309,17 +312,31 @@ export const GlobalContextProvider = ({ children }) => {
     };
   }
 
+  /**
+ * Aplica um filtro de busca textual a uma lista de recursos.
+ * A busca considera os campos: nome, descrição e tags (se existirem),
+ * desconsiderando acentuação, caracteres especiais e capitalização.*/
   const applySearchFilter = (lista, text) => {
+    /**Função auxiliar que normaliza o texto:
+     - remove espaços extras
+     - remove acentos (unicode NFD)
+     - remove caracteres especiais
+     - transforma em minúsculas */
     const normalizar = (text) =>
       text
         ?.trim()
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^\w\s]/gi, "")
+        .replace(/[\u0300-\u036f]/g, "")//Remove acentos
+        .replace(/[^\w\s]/gi, "")//Remove caracteres especiais
         .toLowerCase();
 
+    // Texto digitado pelo usuário, já normalizado
     const normalizedSearch = normalizar(text);
 
+    /**Filtra os recursos que contenham o termo de busca em:
+    - nome
+    - alguma das tags
+    - descrição */
     return lista.filter(resource =>
       normalizar(resource.nome).includes(normalizedSearch) ||
       (Array.isArray(resource.tags) && resource.tags.some(tag =>
@@ -331,27 +348,39 @@ export const GlobalContextProvider = ({ children }) => {
 
   const search = debounce((searchText) => {
 
-
+    /** Armazena o texto digitado pelo usuário em um useState.  
+ * Esse valor é utilizado quando o usuário digita algo na searchbar,  
+ * aplicando automaticamente um filtro sobre os itens que já foram filtrados por categoria ou tag. */
     setSearchValue(searchText)
 
-    if (searchText.trim()) {
+    if (searchText.trim()) { // Verifica se o usuário digitou algum texto (ignora espaços em branco)
 
-      let base = resources;
+      let base = resources; // Começa com a lista completa de recursos como base
 
       if (filters.length > 0) {
+        // Se houver filtros ativos, filtra a base por categoria (primeiro filtro) ou tipo "ad"
         base = base.filter(r => r.categoria === filters[0] || r.tipo === 'ad');
       } else if (selectedTag) {
+        // Se não houver filtro de categoria, mas houver uma tag selecionada,
+        // filtra por recursos que contenham essa tag ou que sejam do tipo "ad"
         base = base.filter(r => r.tags?.includes(selectedTag) || r.tipo === 'ad');
       }
 
+      // Aplica a função de busca textual sobre a base filtrada
       const searchResults = applySearchFilter(base, searchText);
+
+      // Atualiza os recursos filtrados com os resultados da busca
       setFilteredResources(searchResults);
-    } else {
+
+    } else {// Se o texto de busca estiver vazio...
       if (filters.length > 0) {
+        // Aplica somente o filtro de categoria
         handleFilter(filters[0], searchText);
       } else if (selectedTag) {
+        // Aplica somente o filtro por tag
         handleTagFilter(selectedTag, searchText);
       } else {
+        // Se não houver filtros nem texto de busca, limpa todos os filtros
         clearFilters();
       }
     }

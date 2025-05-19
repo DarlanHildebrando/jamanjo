@@ -46,6 +46,8 @@ function Header() {
   const toggleFilter = (category) => {
     if (isCategorySelected(category)) {
       handleFilter(null);
+      if(searchValue){ 
+      clearFilters(searchValue)} //Limpa filtros e busca no resources caso searchbar esteja com algum conteúdo
     } else {
       handleFilter(category);
     }
@@ -96,7 +98,7 @@ function Header() {
         >
           {/* Logo à esquerda */}
           <Box
-            onClick={() => clearFilters(searchValue)} // Limpa todos os filtros ao clicar no logo
+            onClick={() => clearFilters(searchValue)} // Limpa todos os filtros ao clicar no logo, passa o valor da searchbar para busca caso não esteja vazia
             sx={{
               cursor: "pointer",
               display: "flex",
@@ -125,7 +127,7 @@ function Header() {
               <Tooltip title="Limpar Filtros" arrow>
                 <IconButton 
                   color="secondary" 
-                  onClick={() => clearFilters(searchValue)} // Limpa todos os filtros
+                  onClick={() => clearFilters(searchValue)} // Limpa todos os filtros, passa o valor da searchbar para busca caso não esteja vazia
                   sx={{ color: 'white' }}
                 >
                   <FilterAltOffIcon />
@@ -166,7 +168,7 @@ function Header() {
                 color="primary"
                 sx={{ color: 'white' }}
                 aria-label="menu"
-                onClick={handleMenuClick(sear)}
+                onClick={handleMenuClick}
               >
                 <MenuIcon />
               </IconButton>
